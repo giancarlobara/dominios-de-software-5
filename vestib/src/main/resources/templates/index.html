@@ -1,14 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
 </head>
 <body>
 <h1>
-    Ola mundo
+    Pagina Home
 </h1>
-<a href="#" th:href="@{/ensino/add}">cadastrar Area de Ensino</a>
-<a href="#" th:href="@{/logout}">Log Out</a>
+<div class = "row">
+    <div class="col-6">
+        <a href="#" th:href="@{/ensino/add}"><button type="button" class="btn btn-primary">cadastrar Area de Ensino </button></a>
+    </div>
+    <div class="col-6">
+        <a href="#" th:href="@{/ensino/list}"><button type="button" class="btn btn-primary"> Listar Areas de Ensino </button></a>
+    </div>
+
+</div>
+<div class = "row">
+    <div class = "col-4"></div>
+    <a href="#" th:href="@{/logout}">Log Out</a>
+
+</div>
+
+
 </body>
 </html>
