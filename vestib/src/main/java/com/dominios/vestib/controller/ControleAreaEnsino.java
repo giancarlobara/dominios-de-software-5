@@ -42,7 +42,7 @@ public class ControleAreaEnsino {
     }
     @GetMapping("/list")
     public String getAdminListFeatured(Model model) throws ParseException {
-        model.addAttribute("ensinos",(ArrayList<AreaEnsino>)repositorioAreaEnsino.findAll());
+        model.addAttribute("ensinos",repositorioAreaEnsino.findAllOrderByCodigo());
         return "/lista-area-ensino";
     }
     @PostMapping({"/remove"})
