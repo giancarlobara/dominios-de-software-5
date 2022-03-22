@@ -12,13 +12,21 @@
         <div class="col-4"><a th:href="@{/home}">voltar</a></div>
     </div>
     <h1>Areas de Ensino</h1>
+    <h2 th:if="${#lists.isEmpty(ensinos)}">Não possui registros.</h2>
     <table th:unless="${#lists.isEmpty(ensinos)}" class="table table-hover table--sortable">
             <thead class="bg-primary">
                 <tr>
-                    <td>codigo</td>
-                    <td>nome</td>
-                    <td>nivel</td>
-                    <td>cidade locação</td>
+                    <td>Codigo</td>
+                    <td>Nome</td>
+                    <td>Nivel</td>
+                    <td>Cidade locação</td>
+                    <td>Função</td>
+                    <td>Vagas</td>
+                    <td>Vagas pne</td>
+                    <td>Vagas cota</td>
+                    <td>Gabarito</td>
+                    <td>Nota mínima</td>
+                    <td>Grupo</td>
                     <td>ações</td>
                 </tr>
             </thead>
@@ -27,8 +35,17 @@
                 <tr>
                     <td th:text="${ensino.codigo}">...</td>
                     <td th:text="${ensino.nome}">...</td>
-                    <td th:text="${ensino.nivel}">...</td>
+                    <td th:text="${ensino.nivel.valor}">...</td>
                     <td th:text="${ensino.cidadeLocacao}">...</td>
+                    <td th:text="${ensino.funcao}">...</td>
+                    <td th:text="${ensino.vagas}">...</td>
+                    <td th:text="${ensino.vagasPne}">...</td>
+                    <td th:text="${ensino.vagasCota}">...</td>
+                    <td th:text="${ensino.gabarito}">...</td>
+                    <td th:text="${ensino.notaMinima}">...</td>
+                    <td th:text="${ensino.grupo}">...</td>
+
+
                     <td>
                         <form method="POST" th:action="@{/ensino/remove(id=${ensino.id})}">
                             <button type="submit" name="submit" value="value" class="link-button">remover</button>
