@@ -22,8 +22,9 @@
 </div>
 <div class = "row">
     <div class = "col-4"></div>
-    <a href="#" th:href="@{/logout}">Log Out</a>
-
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Logout"/>
+    </form>
 </div>
 
 
