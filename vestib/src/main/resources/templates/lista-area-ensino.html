@@ -8,6 +8,9 @@
           crossorigin="anonymous" />
 </head>
 <body>
+    <div class="row">
+        <div class="col-4"><a th:href="@{/home}">voltar</a></div>
+    </div>
     <h1>Areas de Ensino</h1>
     <table th:unless="${#lists.isEmpty(ensinos)}" class="table table-hover table--sortable">
             <thead class="bg-primary">
@@ -16,6 +19,7 @@
                     <td>nome</td>
                     <td>nivel</td>
                     <td>cidade locação</td>
+                    <td>ações</td>
                 </tr>
             </thead>
             <tbody>
@@ -25,6 +29,11 @@
                     <td th:text="${ensino.nome}">...</td>
                     <td th:text="${ensino.nivel}">...</td>
                     <td th:text="${ensino.cidadeLocacao}">...</td>
+                    <td>
+                        <form method="POST" th:action="@{/ensino/remove(id=${ensino.id})}">
+                            <button type="submit" name="submit" value="value" class="link-button">remover</button>
+                        </form>
+                    </td>
                 </tr>
             </th:block>
             </tbody>

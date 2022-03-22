@@ -45,5 +45,10 @@ public class ControleAreaEnsino {
         model.addAttribute("ensinos",(ArrayList<AreaEnsino>)repositorioAreaEnsino.findAll());
         return "/lista-area-ensino";
     }
+    @PostMapping({"/remove"})
+    public String remove(@RequestParam long id) {
+        repositorioAreaEnsino.deleteById(id);
+        return "redirect:/ensino/list";
+    }
 
 }
