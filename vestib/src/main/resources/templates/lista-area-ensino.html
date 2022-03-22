@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Areas de Ensino</h1>
+    <table th:unless="${#lists.isEmpty(ensinos)}" class="table table-hover table--sortable">
+            <thead>
+                <tr>
+                    <td>codigo</td>
+                    <td>nome</td>
+                    <td>nivel</td>
+                    <td>cidade locação</td>
+                </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="ensino : ${ensinos}">
+                <tr>
+                    <td th:text="${ensino.codigo}">...</td>
+                    <td th:text="${ensino.nome}">...</td>
+                    <td th:text="${ensino.nivel}">...</td>
+                    <td th:text="${ensino.cidadeLocacao}">...</td>
+                </tr>
+            </th:block>
+            </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>vestib</title>
+</head>
+<body>
+    <h1> Cadastrar Área de Ensino</h1>
+    <form action="#" th:action="@{/ensino/add}" th:object="${areaEnsino}" method="post">
+        <p>codigo da area de ensino: <input type="text" th:field="*{codigo}" /></p>
+        <p>nome: <input type="text" th:field="*{nome}" /></p>
+        <p>cidade de locação: <input type="text" th:field="*{cidadeLocacao}" /></p>
+        <p>nota minima requerida: <input type="number" th:field="*{notaMinima}" /></p>
+        <select  th:field="*{nivel}">
+            <option th:each="nivel : ${T(com.dominios.vestib.model.Escolaridade).values()}"
+                    th:value="${nivel}" th:text="${nivel.valor}"></option>
+        </select>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</body>
+</html>

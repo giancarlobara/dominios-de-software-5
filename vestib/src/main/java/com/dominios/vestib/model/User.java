@@ -1,4 +1,4 @@
-package com.dominios.vestib.models;
+package com.dominios.vestib.model;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
