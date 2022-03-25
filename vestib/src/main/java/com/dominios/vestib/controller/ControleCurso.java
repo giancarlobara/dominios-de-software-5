@@ -1,29 +1,27 @@
 package com.dominios.vestib.controller;
 
 import com.dominios.vestib.model.Curso;
-import com.dominios.vestib.model.Disciplina;
-import com.dominios.vestib.repository.RepositorioDisciplina;
+import com.dominios.vestib.repository.RepositorioCurso;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.persistence.PersistenceException;
 
-@Controller
-public class ControleDisciplina {
-    private final RepositorioDisciplina repositorioDisciplina;
 
-    public ControleDisciplina(RepositorioDisciplina repositorioDisciplina) {
-        this.repositorioDisciplina = repositorioDisciplina;
+@RequestMapping("cursos")
+@Controller("controle_area_ensino")
+public class ControleCurso {
+    private final RepositorioCurso repositorioCurso;
+
+    public ControleCurso(RepositorioCurso repositorioAreaEnsino) {
+        this.repositorioCurso = repositorioAreaEnsino;
     }
 
     @PostMapping("add")
-    public String put(@ModelAttribute Disciplina disciplina) {
+    public String put(@ModelAttribute Curso curso) {
         try{
-            repositorioDisciplina.save(disciplina);
+            repositorioCurso.save(curso);
         }catch (PersistenceException e){
             return "redirect:/adicionar-curso?error=true";
         }
@@ -36,14 +34,18 @@ public class ControleDisciplina {
         return "adicionar-curso";
     }
 
+    @GetMapping
+    public Iterable<Curso> getAll(@ModelAttribute Long id) {
+        return repositorioCurso.findAll();
+    }
     @GetMapping("/list")
     public String getListCursos(Model model){
-        model.addAttribute("cursos",repositorioDisciplina.findAll());
+        model.addAttribute("cursos",repositorioCurso.findAllOrderByCodigo());
         return "/lista-cursos";
     }
     @PostMapping({"/remove"})
     public String remove(@RequestParam long id) {
-        repositorioDisciplina.deleteById(id);
+        repositorioCurso.deleteById(id);
         return "redirect:/cursos/list";
     }
 

@@ -22,7 +22,7 @@ public class Disciplina {
     private int questaoFinal;
 
     @ManyToOne
-    private AreaEnsino areaEnsino;
+    private Curso areaEnsino;
 
 
 }

@@ -12,7 +12,7 @@
         <div class="col-4"><a th:href="@{/home}">voltar</a></div>
     </div>
 <h1> Cadastrar Área de Ensino</h1>
-<form action="#" th:action="@{/ensino/add}" th:object="${areaEnsino}" method="post">
+<form action="#" th:action="@{/cursos/add}" th:object="${curso}" method="post">
     <p>Código: <input type="text" th:field="*{codigo}" required/></p>
     <p>Nome: <input type="text" th:field="*{nome}" required/></p>
     <p>Cidade de locação: <input type="text" th:field="*{cidadeLocacao}" required/></p>

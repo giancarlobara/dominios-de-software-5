@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Data
-public class AreaEnsino {
+public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -36,7 +36,7 @@ public class AreaEnsino {
     @Column(nullable = false, updatable = false)
     private Escolaridade nivel;
 
-    public AreaEnsino() {
+    public Curso() {
     }
 
 }

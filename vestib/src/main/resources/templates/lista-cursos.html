@@ -12,8 +12,8 @@
         <div class="col-4"><a th:href="@{/home}">voltar</a></div>
     </div>
     <h1>Areas de Ensino</h1>
-    <h2 th:if="${#lists.isEmpty(ensinos)}">Não possui registros.</h2>
-    <table th:unless="${#lists.isEmpty(ensinos)}" class="table table-hover table--sortable">
+    <h2 th:if="${#lists.isEmpty(cursos)}">Não possui registros.</h2>
+    <table th:unless="${#lists.isEmpty(cursos)}" class="table table-hover table--sortable">
             <thead class="bg-primary">
                 <tr>
                     <td>Codigo</td>
@@ -31,23 +31,23 @@
                 </tr>
             </thead>
             <tbody>
-            <th:block th:each="ensino : ${ensinos}">
+            <th:block th:each="curso : ${cursos}">
                 <tr>
-                    <td th:text="${ensino.codigo}">...</td>
-                    <td th:text="${ensino.nome}">...</td>
-                    <td th:text="${ensino.nivel.valor}">...</td>
-                    <td th:text="${ensino.cidadeLocacao}">...</td>
-                    <td th:text="${ensino.funcao}">...</td>
-                    <td th:text="${ensino.vagas}">...</td>
-                    <td th:text="${ensino.vagasPne}">...</td>
-                    <td th:text="${ensino.vagasCota}">...</td>
-                    <td th:text="${ensino.gabarito}">...</td>
-                    <td th:text="${ensino.notaMinima}">...</td>
-                    <td th:text="${ensino.grupo}">...</td>
+                    <td th:text="${curso.codigo}">...</td>
+                    <td th:text="${curso.nome}">...</td>
+                    <td th:text="${curso.nivel.valor}">...</td>
+                    <td th:text="${curso.cidadeLocacao}">...</td>
+                    <td th:text="${curso.funcao}">...</td>
+                    <td th:text="${curso.vagas}">...</td>
+                    <td th:text="${curso.vagasPne}">...</td>
+                    <td th:text="${curso.vagasCota}">...</td>
+                    <td th:text="${curso.gabarito}">...</td>
+                    <td th:text="${curso.notaMinima}">...</td>
+                    <td th:text="${curso.grupo}">...</td>
 
 
                     <td>
-                        <form method="POST" th:action="@{/ensino/remove(id=${ensino.id})}">
+                        <form method="POST" th:action="@{/cursos/remove(id=${curso.id})}">
                             <button type="submit" name="submit" value="value" class="link-button">remover</button>
                         </form>
                     </td>
