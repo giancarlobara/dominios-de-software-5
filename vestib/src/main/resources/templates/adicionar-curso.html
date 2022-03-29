@@ -111,7 +111,7 @@
                 <div class="col-12 col-md-4">
                     <div class="form-group">
                         <label>Escolaridade</label>
-                        <select th:field="*{nivel}" class="form-control">
+                        <select th:field="*{nivel}" class="form-control" required>
                             <option value="">Selecione</option>
                             <option th:each="nivel : ${T(com.dominios.vestib.model.Escolaridade).values()}" th:value="${nivel}"
                                     th:text="${nivel.valor}"></option>

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-<div class = "row">
-<div class="col-6">
-    <a href=""><button type="button" class="btn btn-primary">Mandar arquivo </button></a>
-</div>
-
-</div>
+    <form method="POST" th:action="@{/candidatos/upload/csv/{idCurso}(idCurso = ${curso.id})}" enctype="multipart/form-data">
+        <input type="file" name="file" /><br />
+        <br /> <input type="submit" value="Submit"/>
+    </form>
 </body>
 </html>
+
+
