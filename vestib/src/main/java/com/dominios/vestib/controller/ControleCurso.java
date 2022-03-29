@@ -10,7 +10,7 @@ import javax.persistence.PersistenceException;
 
 
 @RequestMapping("cursos")
-@Controller("controle_area_ensino")
+@Controller("controle_curso")
 public class ControleCurso {
     private final RepositorioCurso repositorioCurso;
 
@@ -18,7 +18,7 @@ public class ControleCurso {
         this.repositorioCurso = repositorioAreaEnsino;
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public String put(@ModelAttribute Curso curso) {
         try{
             repositorioCurso.save(curso);

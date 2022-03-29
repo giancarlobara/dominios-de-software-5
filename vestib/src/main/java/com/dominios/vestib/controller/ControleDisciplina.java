@@ -1,18 +1,15 @@
 package com.dominios.vestib.controller;
 
-import com.dominios.vestib.model.Curso;
 import com.dominios.vestib.model.Disciplina;
 import com.dominios.vestib.repository.RepositorioDisciplina;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.PersistenceException;
 
-@Controller
+@RequestMapping("disciplinas")
+@Controller("controle-disciplina")
 public class ControleDisciplina {
     private final RepositorioDisciplina repositorioDisciplina;
 
@@ -20,7 +17,7 @@ public class ControleDisciplina {
         this.repositorioDisciplina = repositorioDisciplina;
     }
 
-    @PostMapping("add")
+    @PostMapping("/add")
     public String put(@ModelAttribute Disciplina disciplina) {
         try{
             repositorioDisciplina.save(disciplina);
@@ -30,21 +27,21 @@ public class ControleDisciplina {
         return "redirect:/cursos/list";
     }
     @GetMapping("/add")
-    public String getAddCurso(Model model) {
+    public String getAddDisciplina(Model model) {
 
-        model.addAttribute("curso", new Curso());
+        model.addAttribute("disciplina", new Disciplina());
         return "adicionar-curso";
     }
 
     @GetMapping("/list")
-    public String getListCursos(Model model){
-        model.addAttribute("cursos",repositorioDisciplina.findAll());
+    public String getListDisciplina(Model model){
+        model.addAttribute("disciplinas",repositorioDisciplina.findAll());
         return "/lista-cursos";
     }
     @PostMapping({"/remove"})
     public String remove(@RequestParam long id) {
         repositorioDisciplina.deleteById(id);
-        return "redirect:/cursos/list";
+        return "redirect:/disciplinas/list";
     }
 
 }
