@@ -8,52 +8,73 @@
           crossorigin="anonymous" />
 </head>
 <body>
-    <div class="row">
-        <div class="col-4"><a th:href="@{/home}">voltar</a></div>
+    <div class="jumbotron p-4 my-1">
+        <h1 class="display-4">Lista de Cursos</h1>
     </div>
-    <h1>Lista de Cursos</h1>
-    <h2 th:if="${#lists.isEmpty(cursos)}">Não possui registros.</h2>
-    <table th:unless="${#lists.isEmpty(cursos)}" class="table table-hover table--sortable">
-            <thead class="bg-primary">
-                <tr>
-                    <td>Codigo</td>
-                    <td>Nome</td>
-                    <td>Nivel</td>
-                    <td>Cidade locação</td>
-                    <td>Função</td>
-                    <td>Vagas</td>
-                    <td>Vagas pne</td>
-                    <td>Vagas cota</td>
-                    <td>Gabarito</td>
-                    <td>Nota mínima</td>
-                    <td>Grupo</td>
-                    <td>ações</td>
-                </tr>
-            </thead>
-            <tbody>
-            <th:block th:each="curso : ${cursos}">
-                <tr>
-                    <td th:text="${curso.codigo}">...</td>
-                    <td th:text="${curso.nome}">...</td>
-                    <td th:text="${curso.nivel.valor}">...</td>
-                    <td th:text="${curso.cidadeLocacao}">...</td>
-                    <td th:text="${curso.funcao}">...</td>
-                    <td th:text="${curso.vagas}">...</td>
-                    <td th:text="${curso.vagasPne}">...</td>
-                    <td th:text="${curso.vagasCota}">...</td>
-                    <td th:text="${curso.gabarito}">...</td>
-                    <td th:text="${curso.notaMinima}">...</td>
-                    <td th:text="${curso.grupo}">...</td>
+    <nav class="mb-5">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a th:href="@{/home}">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Lista de Cursos</li>
+        </ol>
+    </nav>
+    <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#lists.isEmpty(cursos)}">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div>
+            Não possui registros.
+        </div>
+    </div>
 
 
-                    <td>
-                        <form method="POST" th:action="@{/cursos/remove(id=${curso.id})}">
-                            <button type="submit" name="submit" value="value" class="link-button">remover</button>
-                        </form>
-                    </td>
-                </tr>
-            </th:block>
-            </tbody>
+
+
+    <table th:unless="${#lists.isEmpty(cursos)}" class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Código</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Nivel</th>
+                <th scope="col">Cidade locação</th>
+                <th scope="col">Função</th>
+                <th scope="col">Grupo</th>
+                <th scope="col">Ações</th>
+                <th scope="col">Visualizar curso</th>
+            </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="curso : ${cursos}">
+            <tr>
+                <td th:text="${curso.codigo}">...</td>
+                <td th:text="${curso.nome}">...</td>
+                <td th:text="${curso.nivel.valor}">...</td>
+                <td th:text="${curso.cidadeLocacao}">...</td>
+                <td th:text="${curso.funcao}">...</td>
+                <td th:text="${curso.grupo}">...</td>
+
+
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Editar</a>
+                            <a class="dropdown-item" method="POST" th:action="@{/cursos/remove(id=${curso.id})}" href="#">Remover</a>
+                        </div>
+                    </div>
+                   <!--
+                   <form method="POST" th:action="@{/cursos/remove(id=${curso.id})}">
+                        <button type="submit" name="submit" value="value" class="link-button">remover</button>
+                    </form>
+                    -->
+                </td>
+                <td>
+                    <form method="POST" th:action="@{/cursos/list/{idCurso}(idCurso=${curso.id})}">
+                        <button type="submit" name="submit" value="value" class="link-button">Visualizar</button>
+                    </form>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
     </table>
 </body>
 </html>
