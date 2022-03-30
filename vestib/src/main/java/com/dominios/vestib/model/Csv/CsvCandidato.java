@@ -9,9 +9,9 @@ import java.time.LocalDate;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class CandidatoCsv extends CsvBean{
+public class CsvCandidato extends CsvBean{
     @CsvBindByName(column = "nome")
-    private String name;
+    private String nome;
 
     @CsvBindByName
     private String codigo;
@@ -22,26 +22,38 @@ public class CandidatoCsv extends CsvBean{
     @CsvBindByName
     private int inscricao;
 
+    private int jurado;
+
     @CsvBindByName
     private String cpf;
 
     @CsvBindByName
-    @CsvDate("dd/MM/yyyy")
+    @CsvDate(value = "dd/MM/yyyy")
     private LocalDate dataNasc;
 
-    public CandidatoCsv() {
+    public CsvCandidato() {
     }
 
-    public CandidatoCsv(String name, String codigo, int situacao, int inscricao, String cpf) {
-        this.name = name;
+    public CsvCandidato(String nome, String codigo, int situacao, int inscricao, String cpf) {
+        this.nome = nome;
         this.codigo = codigo;
         this.situacao = situacao;
         this.inscricao = inscricao;
         this.cpf = cpf;
     }
 
-    public CandidatoCsv(String name, String codigo, int situacao, int inscricao, String cpf, LocalDate dataNasc) {
-        this.name = name;
+    public CsvCandidato(String nome, String codigo, int situacao, int inscricao, int jurado, String cpf, LocalDate dataNasc) {
+        this.nome = nome;
+        this.codigo = codigo;
+        this.situacao = situacao;
+        this.inscricao = inscricao;
+        this.jurado = jurado;
+        this.cpf = cpf;
+        this.dataNasc = dataNasc;
+    }
+
+    public CsvCandidato(String nome, String codigo, int situacao, int inscricao, String cpf, LocalDate dataNasc) {
+        this.nome = nome;
         this.codigo = codigo;
         this.situacao = situacao;
         this.inscricao = inscricao;

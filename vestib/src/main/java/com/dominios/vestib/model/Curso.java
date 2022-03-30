@@ -39,4 +39,7 @@ public class Curso {
     public Curso() {
     }
 
+    public Curso(Long idCurso) {
+        this.id = idCurso;
+    }
 }

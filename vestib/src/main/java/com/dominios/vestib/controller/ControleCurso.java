@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import javax.persistence.PersistenceException;
+import java.util.Optional;
 
 
 @RequestMapping("cursos")
@@ -34,9 +35,14 @@ public class ControleCurso {
         return "adicionar-curso";
     }
 
-    @GetMapping
-    public Iterable<Curso> getAll(@ModelAttribute Long id) {
-        return repositorioCurso.findAll();
+    @GetMapping("/list/{id}")
+    public String getCurso(Model model,@PathVariable Long id){
+        Optional<Curso> curso = repositorioCurso.findById(id);
+        if(curso.isPresent()) {
+            model.addAttribute("curso", curso.get());
+            return "/visualizar-curso";
+        }
+        return "redirect:/cursos/list";
     }
     @GetMapping("/list")
     public String getListCursos(Model model){

@@ -1,5 +1,8 @@
 package com.dominios.vestib.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum Escolaridade{
     F("FUNDAMENTAL"),
     M("MÉDIO"),
@@ -10,8 +13,8 @@ public enum Escolaridade{
     private Escolaridade(String valor) {
         this.valor = valor;
     }
-
     public String getValor() {
         return valor;
     }
+
 }

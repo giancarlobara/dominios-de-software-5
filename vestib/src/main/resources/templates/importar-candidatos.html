@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form method="POST" th:action="@{/candidatos/upload/csv/{idCurso}(idCurso = ${curso.id})}" enctype="multipart/form-data">
+    <form method="POST" th:action="@{/candidatos/upload/csv/{idCurso}(idCurso=${idCurso})}" enctype="multipart/form-data">
         <input type="file" name="file" /><br />
         <br /> <input type="submit" value="Submit"/>
     </form>

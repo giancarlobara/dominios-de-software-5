@@ -1,8 +1,11 @@
 package com.dominios.vestib.model;
 
+import com.dominios.vestib.model.Csv.CsvCandidato;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Data
@@ -38,5 +41,21 @@ public class Candidato {
     //    @Transient
 //    private int classificacaoPcd;
 
+    public Candidato(CsvCandidato candidato) {
+        this.codigo = candidato.getCodigo();
+        this.situacao = candidato.getSituacao();
+        this.inscricao = candidato.getInscricao();
+        this.jurado = candidato.getJurado();
 
+    }
+
+    public Candidato() {
+    }
+
+    public static Candidato transformImModel(CsvCandidato csvCandidato) {
+        return new Candidato(csvCandidato);
+    }
+    public static List<Candidato> convert(List<CsvCandidato> csvCandidatos) {
+        return csvCandidatos.stream().map(Candidato::new).collect(Collectors.toList());
+    }
 }
