@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="dataPresent">Data received</div>
+<div th:fragment="noData">No data</div>
+
+<div th:fragment="list(disciplinas)" id="test">
+  <div class="card" th:each="disciplina : ${disciplinas}">
+    <div class="card-body">
+        <div class="card-text" th:text="${disciplina.nome}">...</div>
+        <div class="card-text" th:text="${disciplina.peso}">...</div>
+    </div>
+  </div>
+</div>
+<div id="ttt">
+    oiiii
+</div>
+</body>
+</html>

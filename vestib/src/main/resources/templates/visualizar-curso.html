@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:replace="index.html :: head">
 </head>
 <body>
 <div class = "col-4">
     <a href="#" th:href="@{/candidatos/get/upload/csv/{idCurso}(idCurso=${curso.id})}"><button type="button" class="btn btn-primary"> importar csv </button></a>
+</div>
+<div class="container" th:unless="${#lists.isEmpty(disciplinas)}">
+    <div th:replace="lista-disciplinas.html :: list(disciplinas=${disciplinas})">...</div>
 </div>
 </body>
 </html>

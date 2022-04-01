@@ -39,7 +39,7 @@ public class ControleDisciplina {
     @GetMapping("/list")
     public String getListDisciplina(Model model){
         model.addAttribute("disciplinas",repositorioDisciplina.findAll());
-        return "/lista-cursos";
+        return "/visualizar-curso";
     }
     @PostMapping({"/remove"})
     public String remove(@RequestParam long id) {
