@@ -1,12 +1,20 @@
 package com.dominios.vestib.controller;
 
+import com.dominios.vestib.dto.addDisciplinasDto;
+import com.dominios.vestib.model.Curso;
 import com.dominios.vestib.model.Disciplina;
 import com.dominios.vestib.repository.RepositorioDisciplina;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.PersistenceException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RequestMapping("disciplinas")
 @Controller("controle-disciplina")
@@ -17,20 +25,22 @@ public class ControleDisciplina {
         this.repositorioDisciplina = repositorioDisciplina;
     }
 
-    @PostMapping("/add")
-    public String put(@ModelAttribute Disciplina disciplina) {
+    @PostMapping("/add/{idCurso}")
+    public String put(@ModelAttribute Disciplina disciplina,@PathVariable Long idCurso) {
         try{
+            disciplina.setCurso(new Curso(idCurso));
             repositorioDisciplina.save(disciplina);
         }catch (PersistenceException e){
-            return "redirect:/adicionar-curso?error=true";
+            return "redirect:/disciplinas/add/" + idCurso + "?error=true";
         }
-        return "redirect:/cursos/list";
+        return "redirect:/disciplinas/add/" + idCurso;
     }
-    @GetMapping("/add")
-    public String getAddDisciplina(Model model) {
 
-        model.addAttribute("disciplina", new Disciplina());
-        return "adicionar-curso";
+    @GetMapping("/add/{idCurso}")
+    public String getAddDisciplina(Model model,@PathVariable Long idCurso) {
+         model.addAttribute("disciplina",new Disciplina());
+         model.addAttribute("idCurso",idCurso);
+        return "/adicionar-disciplina";
     }
 
     @GetMapping("/list")

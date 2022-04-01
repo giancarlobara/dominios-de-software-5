@@ -26,7 +26,7 @@ public class ControleCurso {
         }catch (PersistenceException e){
             return "redirect:/adicionar-curso?error=true";
         }
-        return "redirect:/cursos/list";
+        return "redirect:/disciplinas/add/" + curso.getId();
     }
     @GetMapping("/add")
     public String getAddCurso(Model model) {
@@ -42,7 +42,7 @@ public class ControleCurso {
             model.addAttribute("curso", curso.get());
             return "/visualizar-curso";
         }
-        return "redirect:/cursos/list";
+        return "redirect:/cursos/list?error=true";
     }
     @GetMapping("/list")
     public String getListCursos(Model model){

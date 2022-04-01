@@ -1,10 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>vestib</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+<style>
+    #my_form {
+        display: none;
+    }
+</style>
 </head>
 <body>
 
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">
+            Cadastro Disciplina
+        </h5>
+    </div>
+    <div class="card-body">
+        <div class="card">
+            <div class="card-body">
+                 <div class="card-text">Deseja adicionar alguma disciplina?</div>
+                 <button id="btn_form" class="btn btn-primary">Sim</button>
+                 <a th:href="@{/cursos/list}"><button class="btn btn-danger">Não</button></a>
+            </div>
+        </div>
+
+        <form id="my_form" th:action="@{/disciplinas/add/{idCurso}(idCurso = ${idCurso})}" th:object="${disciplina}" method="post" class="container-fluid">
+            <div class="form-row">
+                <div class="col-12 col-md-8">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" class="form-control" placeholder="Informe o nome da disciplina" th:field="*{nome}" required >
+                    </div>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="form-group">
+                        <label>peso</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="peso padrão é 1" th:field="*{peso}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                        <label>Gabarito</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="ex:ABACDEFAC" th:field="*{gabarito}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="form-row">
+                    <div class="col-12 col-md-2">
+                        <div class="form-group">
+                            <label>Questão inicial</label>
+                            <input type="number" min="0" class="form-control" th:field="*{questaoInicial}">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <div class="form-group">
+                            <label>Questão Final</label>
+                            <input type="number" min="0" class="form-control" th:field="*{questaoFinal}">
+                        </div>
+                    </div>
+                </div>
+            <div class="form-row">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button  type="submit" name="addDisciplina" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+<!--    <div  th:unless="${#lists.isEmpty(obj.get(disciplinas))}">-->
+<!--        <h1 th:text="${obj.get(disciplinas)}"></h1>-->
+<!--        <div class="card-group">-->
+<!--            <th:block th:each="dis : ${disciplinas}">-->
+<!--                <div class="card border-primary">-->
+<!--                    <div class="card-body">-->
+<!--                        <p class="card-text" th:text="${dis.nome}">...</p>-->
+<!--                        <p th:text="${dis.gabarito}">...</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </th:block>-->
+<!--        </div>-->
+<!--    </div>-->
+
 </body>
+
+
+
+
+<script>
+    const btn = document.getElementById('btn_form');
+    const form = document.getElementById('my_form');
+
+    btn.addEventListener('click', function() {
+        if(form.style.display !== 'block') {
+            form.style.display = 'block';
+            return;
+        }
+        form.style.display = 'none';
+    });
+
+</script>
+
 </html>
