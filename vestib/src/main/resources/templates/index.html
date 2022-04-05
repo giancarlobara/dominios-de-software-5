@@ -8,9 +8,14 @@
           crossorigin="anonymous" />
 </head>
 <body>
-<h1>
-    Pagina Home
-</h1>
+<div class="jumbotron p-4 my-1">
+    <h1 class="display-4">Página home</h1>
+</div>
+<nav class="mb-5">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active">Home</li>
+    </ol>
+</nav>
 <div class = "row">
     <div class="col-6">
         <a href="#" th:href="@{/cursos/add}"><button type="button" class="btn btn-primary">cadastrar Area de Ensino </button></a>
