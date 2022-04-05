@@ -2,6 +2,7 @@ package com.dominios.vestib.model;
 
 import com.dominios.vestib.model.Csv.CsvCandidato;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,8 +26,11 @@ public class Candidato {
     @ManyToOne
     private Pessoa pessoa;
 
-//    private String cartaoResposta;
+    private String cartaoResposta;
 
+    private String nomeImagem;
+
+    @Column(columnDefinition = "int default 1")
     private int situacao;
 
     private int inscricao;

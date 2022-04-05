@@ -54,18 +54,18 @@
 
 
                 <td>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Editar</a>
-                            <a class="dropdown-item" method="POST" th:action="@{/cursos/remove(id=${curso.id})}" href="#">Remover</a>
-                        </div>
-                    </div>
-                   <!--
+<!--                    <div class="dropdown">-->
+<!--                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>-->
+<!--                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--                            <a class="dropdown-item" href="#">Editar</a>-->
+<!--                            <a class="dropdown-item" method="POST" th:action="@{/cursos/remove(id=${curso.id})}" href="#">Remover</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                   <div>-->
                    <form method="POST" th:action="@{/cursos/remove(id=${curso.id})}">
                         <button type="submit" name="submit" value="value" class="link-button">remover</button>
                     </form>
-                    -->
+                   </div>
                 </td>
                 <td>
                     <form method="get" th:action="@{/cursos/list/{idCurso}(idCurso=${curso.id})}">

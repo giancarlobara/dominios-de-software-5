@@ -21,7 +21,7 @@ public class Disciplina {
 
     private int questaoFinal;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Curso curso;
 
 

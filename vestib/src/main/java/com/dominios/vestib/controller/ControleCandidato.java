@@ -7,7 +7,6 @@ import com.dominios.vestib.model.Csv.CsvCartaoResposta;
 import com.dominios.vestib.model.Curso;
 import com.dominios.vestib.model.Pessoa;
 import com.dominios.vestib.repository.RepositorioCandidato;
-import com.dominios.vestib.repository.RepositorioPessoa;
 import com.dominios.vestib.service.ServicoCandidato;
 import com.dominios.vestib.service.ServicoCsvCandidato;
 import com.dominios.vestib.service.ServicoPessoa;
@@ -23,8 +22,7 @@ import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @RequestMapping("candidatos")
 @Controller
@@ -91,13 +89,30 @@ public class ControleCandidato {
         return "/importar-cartao-resposta";
     }
     @PostMapping("/upload/csv/cartao/{idCurso}")
-    public String uploadCartaoRespostaCsv(@RequestParam("file") MultipartFile file,@PathVariable Long idCurso) throws Exception {
+    public String uploadCartaoRespostaCsv(Model model,@RequestParam("file") MultipartFile file,@PathVariable Long idCurso) throws Exception {
         servicoCsvCandidato.createFileTemp(Path.of("/opt/file.csv"),file.getBytes());
         List<CsvCartaoResposta> csvCRS = servicoCsvCandidato.readCsvCartaoResposta(Path.of("/opt/file.csv"));
         Files.deleteIfExists(Path.of("/opt/file.csv"));
+
+        List<String> ausentes = new ArrayList<>();
         for(CsvCartaoResposta cr : csvCRS){
-            System.out.println(csvCRS.toString());
+            Optional<Candidato> optionalCandidato = servicoCandidato.getCandidatoByCodigo(cr.getCodigoCandidato(),idCurso);
+            if(optionalCandidato.isPresent()) {
+                Candidato candidato = optionalCandidato.get();
+                if (cr.getAusente() != 0) {
+                    Collection<Map.Entry<String, String>> resp = cr.getQuestoes().entries();
+                    String gabarito = servicoCandidato.formatGabarito(cr.getQuestoes().entries());
+                    candidato.setCartaoResposta(gabarito);
+                }
+                else{
+                    ausentes.add(cr.getCodigoCandidato());
+                }
+                candidato.setSituacao(cr.getAusente());
+                candidato.setNomeImagem(cr.getNomeImagem());
+                servicoCandidato.save(candidato);
+            }
         }
+        model.addAttribute(ausentes);
         return "redirect:/cursos/list/" + idCurso;
     }
 }
