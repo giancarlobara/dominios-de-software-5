@@ -6,6 +6,9 @@
 <div class = "col-4">
     <a href="#" th:href="@{/candidatos/get/upload/csv/{idCurso}(idCurso=${curso.id})}"><button type="button" class="btn btn-primary"> importar csv </button></a>
 </div>
+<div class = "col-4">
+    <a href="#" th:href="@{/candidatos/get/upload/csv/cartao/{idCurso}(idCurso=${curso.id})}"><button type="button" class="btn btn-primary"> importar csv do cartao resposta </button></a>
+</div>
 <div class="container" th:unless="${#lists.isEmpty(disciplinas)}">
     <div th:replace="lista-disciplinas.html :: list(disciplinas=${disciplinas})">...</div>
 </div>

@@ -3,6 +3,7 @@ package com.dominios.vestib.controller;
 import com.dominios.vestib.model.Candidato;
 import com.dominios.vestib.model.Csv.CsvCandidato;
 import com.dominios.vestib.model.Csv.CsvBean;
+import com.dominios.vestib.model.Csv.CsvCartaoResposta;
 import com.dominios.vestib.model.Curso;
 import com.dominios.vestib.model.Pessoa;
 import com.dominios.vestib.repository.RepositorioCandidato;
@@ -83,5 +84,20 @@ public class ControleCandidato {
         sbc.write(list);
         writer.flush();
         writer.close();
+    }
+    @GetMapping ("/get/upload/csv/cartao/{idCurso}")
+    public String uploadCsvCartaoResposta(Model model, @PathVariable Long idCurso) {
+        model.addAttribute("idCurso", idCurso);
+        return "/importar-cartao-resposta";
+    }
+    @PostMapping("/upload/csv/cartao/{idCurso}")
+    public String uploadCartaoRespostaCsv(@RequestParam("file") MultipartFile file,@PathVariable Long idCurso) throws Exception {
+        servicoCsvCandidato.createFileTemp(Path.of("/opt/file.csv"),file.getBytes());
+        List<CsvCartaoResposta> csvCRS = servicoCsvCandidato.readCsvCartaoResposta(Path.of("/opt/file.csv"));
+        Files.deleteIfExists(Path.of("/opt/file.csv"));
+        for(CsvCartaoResposta cr : csvCRS){
+            System.out.println(csvCRS.toString());
+        }
+        return "redirect:/cursos/list/" + idCurso;
     }
 }

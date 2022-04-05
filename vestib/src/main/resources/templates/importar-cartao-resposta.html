@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST" th:action="@{/candidatos/upload/csv/cartao/{idCurso}(idCurso=${idCurso})}" enctype="multipart/form-data">
+    <input type="file" name="file" /><br />
+    <br /> <input type="submit" value="Submit"/>
+</form>
+</body>
+</html>

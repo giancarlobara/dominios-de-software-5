@@ -1,6 +1,7 @@
 package com.dominios.vestib.service;
 
 import com.dominios.vestib.model.Csv.CsvCandidato;
+import com.dominios.vestib.model.Csv.CsvCartaoResposta;
 import com.dominios.vestib.repository.RepositorioCandidato;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
 import com.opencsv.bean.CsvToBean;
@@ -41,5 +42,18 @@ public class ServicoCsvCandidato {
         reader.close();
 
         return csvCandidatos;
+    }
+    public List<CsvCartaoResposta> readCsvCartaoResposta(Path path) throws IOException {
+        ColumnPositionMappingStrategy estrategia = new ColumnPositionMappingStrategy();
+        estrategia.setType(CsvCartaoResposta.class);
+        Reader reader = Files.newBufferedReader(path);
+
+        CsvToBean<CsvCartaoResposta> csvToBean = new CsvToBeanBuilder(reader)
+                .withType(CsvCartaoResposta.class)
+                .build();
+        List<CsvCartaoResposta> csvCartaoRespostas = csvToBean.parse();
+        reader.close();
+
+        return csvCartaoRespostas;
     }
 }
