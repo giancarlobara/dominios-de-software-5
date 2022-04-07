@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous" />
@@ -54,14 +56,14 @@
 
 
                 <td>
-<!--                    <div class="dropdown">-->
-<!--                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>-->
-<!--                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-<!--                            <a class="dropdown-item" href="#">Editar</a>-->
-<!--                            <a class="dropdown-item" method="POST" th:action="@{/cursos/remove(id=${curso.id})}" href="#">Remover</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                   <div>-->
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Editar</a>
+                            <a class="dropdown-item" method="POST" th:action="@{/cursos/remove(id=${curso.id})}" href="#">Remover</a>
+                        </div>
+                    </div>
+                   <div>
                    <form method="POST" th:action="@{/cursos/remove(id=${curso.id})}">
                         <button type="submit" name="submit" value="value" class="link-button">remover</button>
                     </form>
