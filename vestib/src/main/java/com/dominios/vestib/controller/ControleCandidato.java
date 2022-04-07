@@ -48,6 +48,12 @@ public class ControleCandidato {
         }
         return "redirect:/cursos/list";
     }
+    @GetMapping("/list/{idCurso}")
+    public String getCandidatos(Model model,@PathVariable long idCurso) {
+        model.addAttribute("candidatos",repositorioCandidato.findByCursoId(idCurso));
+        return "lista-candidatos";
+    }
+
     @GetMapping ("/get/upload/csv/{idCurso}")
     public String uploadCsv(Model model, @PathVariable Long idCurso) {
         model.addAttribute("idCurso", idCurso);
