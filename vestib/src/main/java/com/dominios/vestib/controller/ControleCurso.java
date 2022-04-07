@@ -55,6 +55,7 @@ public class ControleCurso {
     }
     @PostMapping({"/remove"})
     public String remove(@RequestParam long id) {
+        servicoDisciplina.deleteAllByCurso(id);
         repositorioCurso.deleteById(id);
         return "redirect:/cursos/list";
     }

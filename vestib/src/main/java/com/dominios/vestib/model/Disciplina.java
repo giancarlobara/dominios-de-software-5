@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Disciplina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String nome;
 
@@ -21,7 +21,7 @@ public class Disciplina {
 
     private int questaoFinal;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Curso curso;
 
 

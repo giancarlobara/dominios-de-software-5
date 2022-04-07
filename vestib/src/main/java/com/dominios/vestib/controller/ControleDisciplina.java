@@ -21,6 +21,7 @@ public class ControleDisciplina {
     @PostMapping("/add/{idCurso}")
     public String put(@ModelAttribute Disciplina disciplina,@PathVariable Long idCurso) {
         try{
+
             disciplina.setCurso(new Curso(idCurso));
             repositorioDisciplina.save(disciplina);
         }catch (PersistenceException e){

@@ -18,7 +18,7 @@ public class ServicoDisciplina {
         return repositorioDisciplina.findByIdCurso(idCurso);
     }
     public void deleteAllByCurso(long idCurso){
-        repositorioDisciplina.deleteAllByCursoId(idCurso);
+        repositorioDisciplina.deleteAllByCursoId(idCurso);;
     }
 
 }
