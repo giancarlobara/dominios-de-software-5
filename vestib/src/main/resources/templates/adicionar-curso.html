@@ -8,8 +8,6 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 
 </head>
-
-<body>
 <div class="jumbotron p-4 my-1">
     <h1 class="display-4">Cadastrar Curso</h1>
 </div>
@@ -21,106 +19,108 @@
         <li class="breadcrumb-item active">Cadastrar Curso</li>
     </ol>
 </nav>
-
-<div class="card">
-    <div class="card-header">
-        <h5 class="mb-0">
-            Cadastro
-        </h5>
-    </div>
-    <div class="card-body">
-        <form action="#" th:action="@{/cursos/add}" th:object="${curso}" method="post" class="container-fluid">
-            <div class="form-row">
-                <div class="col-12 col-md-1">
-                    <div class="form-group">
-                        <label>Código</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Cod" th:field="*{codigo}" required>
+<body>
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">
+                Cadastro
+            </h5>
+        </div>
+        <div class="card-body">
+            <form action="#" th:action="@{/cursos/add}" th:object="${curso}" method="post" class="container-fluid">
+                <div class="form-row">
+                    <div class="col-12 col-md-1">
+                        <div class="form-group">
+                            <label>Código</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Cod" th:field="*{codigo}" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input type="text" class="form-control" placeholder="Informe o nome do curso" th:field="*{nome}" required >
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-3">
+                        <div class="form-group">
+                            <label>Locação</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Informe a cidade de locação" th:field="*{cidadeLocacao}" required>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-8">
-                    <div class="form-group">
-                        <label>Nome</label>
-                        <input type="text" class="form-control" placeholder="Informe o nome do curso" th:field="*{nome}" required >
+
+                <div class="form-row">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label>Função</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="" th:field="*{funcao}">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-12 col-md-3">
-                    <div class="form-group">
-                        <label>Locação</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Informe a cidade de locação" th:field="*{cidadeLocacao}" required>
+                    <div class="col-12 col-md-2">
+                        <div class="form-group">
+                            <label>Vagas</label>
+                            <input type="number" min="0" class="form-control" th:field="*{vagas}">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <div class="form-group">
+                            <label>Vagas para Cotistas</label>
+                            <input type="number" min="0" class="form-control" th:field="*{vagasCota}">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-2">
+                        <div class="form-group">
+                            <label>Vagas para PcD</label>
+                            <input type="number" min="0" class="form-control" th:field="*{vagasPne}">
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-row">
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label>Função</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="" th:field="*{funcao}">
+                <div class="form-row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Gabarito</label>
+                            <input type="text" class="form-control" th:field="*{gabarito}" placeholder="Informe o gabarito">
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-2">
-                    <div class="form-group">
-                        <label>Vagas</label>
-                        <input type="number" min="0" class="form-control" th:field="*{vagas}">
-                    </div>
-                </div>
-                <div class="col-12 col-md-2">
-                    <div class="form-group">
-                        <label>Vagas para Cotistas</label>
-                        <input type="number" min="0" class="form-control" th:field="*{vagasCota}">
-                    </div>
-                </div>
-                <div class="col-12 col-md-2">
-                    <div class="form-group">
-                        <label>Vagas para PcD</label>
-                        <input type="number" min="0" class="form-control" th:field="*{vagasPne}">
-                    </div>
-                </div>
-            </div>
 
-            <div class="form-row">
-                <div class="col-12">
-                    <div class="form-group">
-                        <label>Gabarito</label>
-                        <input type="text" class="form-control" th:field="*{gabarito}" placeholder="Informe o gabarito">
+                <div class="form-row">
+                    <div class="col-12 col-md-2">
+                        <div class="form-group">
+                            <label>Nota mínima requerida:</label>
+                            <div class="input-group">
+                                <input type="number" min="0" max="10" class="form-control" th:field="*{notaMinima}">
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="col-12 col-md-2">
-                    <div class="form-group">
-                        <label>Nota mínima requerida:</label>
-                        <div class="input-group">
-                            <input type="number" min="0" max="10" class="form-control" th:field="*{notaMinima}">
+                    <div class="col-12 col-md-6">
+                        <div class="form-group">
+                            <label>Grupo</label>
+                            <input type="text" min="0" class="form-control" th:field="*{grupo}">
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-group">
+                            <label>Escolaridade</label>
+                            <select th:field="*{nivel}" class="form-control" required>
+                                <option value="">Selecione</option>
+                                <option th:each="nivel : ${T(com.dominios.vestib.model.Escolaridade).values()}" th:value="${nivel}"
+                                        th:text="${nivel.valor}"></option>
+                            </select>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6">
-                    <div class="form-group">
-                        <label>Grupo</label>
-                        <input type="text" min="0" class="form-control" th:field="*{grupo}">
-                    </div>
-                </div>
-                <div class="col-12 col-md-4">
-                    <div class="form-group">
-                        <label>Escolaridade</label>
-                        <select th:field="*{nivel}" class="form-control" required>
-                            <option value="">Selecione</option>
-                            <option th:each="nivel : ${T(com.dominios.vestib.model.Escolaridade).values()}" th:value="${nivel}"
-                                    th:text="${nivel.valor}"></option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <p><input type="submit" value="Submit" class="btn btn-primary"/><input type="reset" class="btn btn-secondary" value=" Reset " /></p>
-        </form>
+                <p><input type="submit" value=" Enviar" class="btn btn-primary"/> <input type="reset" class="btn btn-secondary" value="Limpar" /></p>
+            </form>
+        </div>
     </div>
 </div>
 </body>
