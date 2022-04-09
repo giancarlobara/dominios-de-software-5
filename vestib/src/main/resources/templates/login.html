@@ -9,111 +9,59 @@
           crossorigin="anonymous" />
 </head>
 <body>
-<div class="container-fluid text-center">
-    <form th:action="@{/login}" method="post">
+<div id="login">
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-20">
 
-        <div th:if="${param.error}">
-            <p class="text-danger">Os dados de acesso estão incorretos, por favor tente novamente!</p>
-        </div>
+                    <form id="login-form" class="form" th:action="@{/login}" method="post">
 
-        <div th:if="${param.logout}">
-            <p class="text-warning">You have been logged out.</p>
+                        <h3 class="text-center text-info">Login</h3><br/>
+                        <div th:if="${param.error}">
+                            <p class="text-danger">Os dados de acesso estão incorretos, por favor tente novamente!</p>
+                        </div>
+                        <div class="form-group">
+                            <input type="username" name="username" class="form-control" placeholder="Usuário" autocomplete="off" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control" placeholder="Senha" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="remember-me" class="text-info"><span>Lembre-se de mim</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Entrar</button>
+                        </div>
+                        <br/>
+                        <br/><br/>
+                        <br/><br/>
+                        <br/>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <div class="border border-secondary p-3 rounded">
-            <a>Login</a>
-            <p>
-                <input type="username" name="username" class="form-control" placeholder="Usuario" autocomplete="off" required autofocus/>
-            </p>
-            <p>
-                <input type="password" name="password" class="form-control" placeholder="Senha" required />
-            </p>
-            <p>
-                <input type="checkbox" name="remember-me" />Lembrar de mim
-            </p>
-            <p>
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </p>
-        </div>
-    </form>
+    </div>
 </div>
 </body>
-</html>
 
-<!-- CSS -->
-
-<style>
-	*{
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-		font-family: Helvetica;
-		color: #1b1b1b;
-		border: none
-	}
-
-	body{
-		background-color: dodgerblue;
-	}
-
-	textarea:focus, input:focus {
-		outline: none;
-	}
-
-	.container-fluid {
-		background-color: white;
-		width: 300px;
-		margin-right: auto;
-		margin-left: auto;
-		padding: 20px 30px;
-		margin-top: 10vh;
-		border-radius: 10px;
-		text-align: center;
-	}
-
-	form {
-		margin-top: 30px;
-		margin-bottom: 40px;
-	}
-
-	input {
-		display: block;
-		width: 100%;
-		text-align: left;
-		border-bottom: 1px solid black;
-		margin-bottom: 20px;
-	}
-
-	input[type="submit"] {
-		text-align: center;
-		text-transform: uppercase;
-		border: none;
-		font-weight: bold;
-		height: 40px;
-		border-radius: 20px; /*deixar pontas redondas*/
-		margin-top: 30px;
-		cursor: pointer;
-		background-color: blue;
-		color: white;
-	}
-
-	input[type="submit"]:hover {
-		background-color: darkblue;
-		transition: .3s;
-	}
-
-	input[type="checkbox"] {
-		position: relative;
-		top: 0;
-		left: 0;
-		height: 15px;
- 		width: 15px;
- 	 	background-color: lightgray;
-	}
-
-	a {
-		font-size: 30px;
-
-	}
-
+<style >
+    body {
+    margin: 0;
+    padding: 0;
+    background-color: #bcdfe0;
+    height: 100vh;
+  }
+  #login .container #login-row #login-column #login-box {
+    margin-top: 120px;
+    margin-bottom: 120px;
+    max-width: 800px;
+    height: 340px;
+    border: 1px solid #9C9C9C;
+    background-color: #EAEAEA;
+  }
+  #login .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
+  }
+  #login .container #login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
+  }
 </style>
