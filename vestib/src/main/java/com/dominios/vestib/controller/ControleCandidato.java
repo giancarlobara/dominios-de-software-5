@@ -27,13 +27,11 @@ import java.util.*;
 @RequestMapping("candidatos")
 @Controller
 public class ControleCandidato {
-    private final RepositorioCandidato repositorioCandidato;
     private final ServicoCsvCandidato servicoCsvCandidato;
     private final ServicoPessoa servicoPessoa;
     private final ServicoCandidato servicoCandidato;
 
-    public ControleCandidato(RepositorioCandidato repositorioCandidato, ServicoCsvCandidato servicoCsvCandidato, ServicoPessoa servicoPessoa, ServicoCandidato servicoCandidato) {
-        this.repositorioCandidato = repositorioCandidato;
+    public ControleCandidato(ServicoCsvCandidato servicoCsvCandidato, ServicoPessoa servicoPessoa, ServicoCandidato servicoCandidato) {
         this.servicoCsvCandidato = servicoCsvCandidato;
         this.servicoPessoa = servicoPessoa;
         this.servicoCandidato = servicoCandidato;
@@ -42,7 +40,7 @@ public class ControleCandidato {
     @PostMapping("/add")
     public String put(@ModelAttribute Candidato candidato) {
         try{
-            repositorioCandidato.save(candidato);
+            servicoCandidato.save(candidato);
         }catch (PersistenceException e){
             return "redirect:/adicionar-curso?error=true";
         }
@@ -50,7 +48,7 @@ public class ControleCandidato {
     }
     @GetMapping("/list/{idCurso}")
     public String getCandidatos(Model model,@PathVariable long idCurso) {
-        model.addAttribute("candidatos",repositorioCandidato.findByCursoId(idCurso));
+        model.addAttribute("candidatos",servicoCandidato.getByCurso(idCurso));
         return "lista-candidatos";
     }
 

@@ -31,7 +31,7 @@ public class ServicoCsvCandidato {
         fileTemp.close();
     }
     public List<CsvCandidato> readCsv(Path path) throws IOException {
-        ColumnPositionMappingStrategy estrategia = new ColumnPositionMappingStrategy();
+        ColumnPositionMappingStrategy<CsvCandidato> estrategia = new ColumnPositionMappingStrategy<>();
         estrategia.setType(CsvCandidato.class);
         Reader reader = Files.newBufferedReader(path);
 
@@ -44,7 +44,7 @@ public class ServicoCsvCandidato {
         return csvCandidatos;
     }
     public List<CsvCartaoResposta> readCsvCartaoResposta(Path path) throws IOException {
-        ColumnPositionMappingStrategy estrategia = new ColumnPositionMappingStrategy();
+        ColumnPositionMappingStrategy<CsvCartaoResposta> estrategia = new ColumnPositionMappingStrategy<>();
         estrategia.setType(CsvCartaoResposta.class);
         Reader reader = Files.newBufferedReader(path);
 
@@ -56,4 +56,5 @@ public class ServicoCsvCandidato {
 
         return csvCartaoRespostas;
     }
+
 }

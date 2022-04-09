@@ -4,10 +4,7 @@ import com.dominios.vestib.model.Candidato;
 import com.dominios.vestib.repository.RepositorioCandidato;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
-import java.util.TreeMap;
+import java.util.*;
 
 @Service
 public class ServicoCandidato {
@@ -23,6 +20,9 @@ public class ServicoCandidato {
         optionalCandidato.ifPresent(value -> candidato.setId(value.getId()));
         repositorioCandidato.save(candidato);
         return candidato.getId();
+    }
+    public List<Candidato> getByCurso(Long idCurso){
+        return repositorioCandidato.findByCursoId(idCurso);
     }
     public Optional<Candidato> getCandidatoByCodigo(String codigo,Long idCurso){
         return repositorioCandidato.findByCodigoAndCursoId(codigo,idCurso);

@@ -4,6 +4,7 @@ import com.dominios.vestib.model.Pessoa;
 import com.dominios.vestib.repository.RepositorioPessoa;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,5 +19,11 @@ public class ServicoPessoa {
         optionalPessoa.ifPresent(value -> pessoa.setId(value.getId()));
         repositorioPessoa.save(pessoa);
         return pessoa.getId();
+    }
+    public List<Pessoa> getAll(){
+        return repositorioPessoa.findAll();
+    }
+    public void delete(Long id){
+        repositorioPessoa.deleteById(id);
     }
 }
