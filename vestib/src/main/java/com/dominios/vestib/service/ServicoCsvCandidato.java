@@ -2,17 +2,19 @@ package com.dominios.vestib.service;
 
 import com.dominios.vestib.model.Csv.CsvCandidato;
 import com.dominios.vestib.model.Csv.CsvCartaoResposta;
+import com.dominios.vestib.model.Csv.LogCartaoResposta;
 import com.dominios.vestib.repository.RepositorioCandidato;
-import com.opencsv.bean.ColumnPositionMappingStrategy;
-import com.opencsv.bean.CsvToBean;
-import com.opencsv.bean.CsvToBeanBuilder;
+import com.opencsv.CSVWriter;
+import com.opencsv.bean.*;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -55,6 +57,16 @@ public class ServicoCsvCandidato {
         reader.close();
 
         return csvCartaoRespostas;
+    }
+    public void writeCsvFromBean(List<LogCartaoResposta> log) throws Exception {
+        Writer writer = Files.newBufferedWriter(Paths.get("/opt/pessoas.csv"));
+         StatefulBeanToCsv sbc = new StatefulBeanToCsvBuilder(writer)
+                .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
+                .build();
+
+        sbc.write(log);
+        writer.flush();
+        writer.close();
     }
 
 }

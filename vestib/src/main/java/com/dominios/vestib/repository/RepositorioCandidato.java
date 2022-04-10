@@ -10,4 +10,6 @@ public interface RepositorioCandidato extends CrudRepository<Candidato, Long> {
     Optional<Candidato> findByCodigoAndCursoId(String codigo,Long idCurso);
 
     List<Candidato> findByCursoId(long idCurso);
+
+    List<Candidato> findByCursoIdAndNomeImagemIsNull(long idCurso);
 }

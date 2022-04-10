@@ -64,6 +64,11 @@
                                     <button type="submit" name="submit" value="value" class="dropdown-item">Apagar</button>
                                 </form>
                             </div>
+                            <div>
+                                <form method="GET" th:action="@{/classificacao/generate/{idCurso}(idCurso=${curso.id})}">
+                                    <button type="submit" name="submit" value="value" class="dropdown-item">gerar classificação</button>
+                                </form>
+                            </div>
                         </ul>
                     </div>
                 </td>

@@ -32,6 +32,8 @@ public class Curso {
 
     private String cidadeLocacao;
 
+    private CriterioDesempate criterio;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, updatable = false)
     private Escolaridade nivel;

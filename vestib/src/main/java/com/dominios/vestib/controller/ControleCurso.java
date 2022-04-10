@@ -1,31 +1,35 @@
 package com.dominios.vestib.controller;
 
 import com.dominios.vestib.model.Curso;
-import com.dominios.vestib.repository.RepositorioCurso;
+import com.dominios.vestib.service.ServicoCurso;
 import com.dominios.vestib.service.ServicoDisciplina;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import javax.persistence.PersistenceException;
-import java.util.Optional;
+import javax.servlet.http.HttpServletRequest;
+import java.util.*;
 
 
 @RequestMapping("cursos")
 @Controller("controle_curso")
 public class ControleCurso {
-    private final RepositorioCurso repositorioCurso;
     private final ServicoDisciplina servicoDisciplina;
+    private final ServicoCurso servicoCurso;
 
-    public ControleCurso(RepositorioCurso repositorioAreaEnsino, ServicoDisciplina servicoDisciplina) {
-        this.repositorioCurso = repositorioAreaEnsino;
+    public ControleCurso(ServicoDisciplina servicoDisciplina, ServicoCurso servicoCurso)     {
         this.servicoDisciplina = servicoDisciplina;
+
+        this.servicoCurso = servicoCurso;
     }
 
     @PostMapping("/add")
     public String put(@ModelAttribute Curso curso) {
         try{
-            repositorioCurso.save(curso);
+            servicoCurso.save(curso);
         }catch (PersistenceException e){
             return "redirect:/adicionar-curso?error=true";
         }
@@ -38,25 +42,24 @@ public class ControleCurso {
         return "adicionar-curso";
     }
 
-    @GetMapping("/list/{id}")
-    public String getCurso(Model model,@PathVariable Long id){
+    @RequestMapping("/list/{id}")
+    public String getCurso(Model model, @PathVariable Long id,RedirectAttributes redirectAttributes, HttpServletRequest request){
         model.addAttribute("disciplinas",servicoDisciplina.getByCurso(id));
-        Optional<Curso> curso = repositorioCurso.findById(id);
-        if(curso.isPresent()) {
-            model.addAttribute("curso", curso.get());
+        Curso curso = servicoCurso.getById(id);
+        if(curso != null) {
+            model.addAttribute("curso", curso);
             return "/visualizar-curso";
         }
         return "redirect:/cursos/list?error=true";
     }
     @GetMapping("/list")
     public String getListCursos(Model model){
-        model.addAttribute("cursos",repositorioCurso.findAllOrderByCodigo());
+        model.addAttribute("cursos",servicoCurso.getAllOrdered());
         return "/lista-cursos";
     }
     @PostMapping({"/remove"})
     public String remove(@RequestParam long id) {
-        servicoDisciplina.deleteAllByCurso(id);
-        repositorioCurso.deleteById(id);
+       servicoCurso.delete(id);
         return "redirect:/cursos/list";
     }
 
