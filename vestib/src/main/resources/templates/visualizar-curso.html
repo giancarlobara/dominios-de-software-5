@@ -21,63 +21,7 @@
             <li class="breadcrumb-item active">Dados do Curso</li>
         </ol>
     </nav>
-    <!-- Botão para acionar modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
-        Importar CSV de candidatos
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Importar CSV de candidatos</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <form method="POST" th:action="@{/candidatos/upload/csv/{idCurso}(idCurso=${idCurso})}" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <input class="form-control" type="file" name="file"/>
-                        </div><br/>
-                        <input type="submit" value="Enviar" class="btn btn-primary float-right"/>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Botão para acionar modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo1">
-        Importar CSV do cartão resposta
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="modalExemplo1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel1">Importar CSV do cartão resposta</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <form method="POST" th:action="@{/candidatos/upload/csv/cartao/{idCurso}(idCurso=${idCurso})}" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <input class="form-control" type="file" name="file"/>
-                        </div><br/>
-                        <input type="submit" value="Enviar" class="btn btn-primary float-right"/>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    <a th:href="@{/candidatos/list/{idCurso}(idCurso=${curso.id})}"><button class="btn btn-primary">candidatos</button> </a>
 
     <div class="card">
         <div class="card-header">

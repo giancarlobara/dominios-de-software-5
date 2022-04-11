@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface RepositorioCandidato extends CrudRepository<Candidato, Long> {
     Optional<Candidato> findByCodigoAndCursoId(String codigo,Long idCurso);
-
+    Optional<Candidato> findByCodigo(String codigo);
     List<Candidato> findByCursoId(long idCurso);
 
     List<Candidato> findByCursoIdAndNomeImagemIsNull(long idCurso);

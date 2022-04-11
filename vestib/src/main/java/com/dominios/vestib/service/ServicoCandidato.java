@@ -22,9 +22,16 @@ public class ServicoCandidato {
         this.servicoPessoa = servicoPessoa;
     }
     public Long save(Candidato candidato){
-        Optional<Candidato> optionalCandidato = repositorioCandidato.findByCodigoAndCursoId(candidato.getCodigo(),candidato.getCurso().getId());
-        optionalCandidato.ifPresent(value -> candidato.setId(value.getId()));
+        Optional<Candidato> optionalCandidato = repositorioCandidato.findByCodigo(candidato.getCodigo());
+
+        optionalCandidato.ifPresent(value -> {
+            if(!Objects.equals(value.getCurso().getId(), candidato.getCurso().getId())){
+                throw new ResponseStatusException(HttpStatus.PRECONDITION_FAILED,"Codigo do candidato já existe em outro curso");
+            }
+            candidato.setId(value.getId());
+        });
         repositorioCandidato.save(candidato);
+
         return candidato.getId();
     }
     public List<Candidato> getByCurso(Long idCurso){
@@ -85,7 +92,6 @@ public class ServicoCandidato {
                 candidato.setCartaoResposta(gabarito);
                 candidato.setSituacao((cr.getAusente() == 1)? 0 : 1);
                 candidato.setNomeImagem(cr.getNomeImagem());
-                save(candidato);
             }else{
                 log.add(new LogCartaoResposta(cr.getCodigoCandidato(),"Candidato não existe ou codigo incorreto"));
             }

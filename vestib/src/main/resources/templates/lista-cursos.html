@@ -32,7 +32,7 @@
             <a href="#" th:href="@{/cursos/add}"><button type="button" class="btn btn-primary">cadastrar Curso </button></a>
         </div>
 
-    <table th:unless="${#lists.isEmpty(cursos)}" class="table table-striped">
+    <table th:unless="${#lists.isEmpty(cursos)}" class="table table-striped table-hover">
         <thead>
             <tr>
                 <th scope="col">Código</th>
