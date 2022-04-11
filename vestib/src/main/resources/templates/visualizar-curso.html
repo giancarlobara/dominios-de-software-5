@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>vestib</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
 <body>
@@ -22,6 +21,63 @@
             <li class="breadcrumb-item active">Dados do Curso</li>
         </ol>
     </nav>
+    <!-- Botão para acionar modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
+        Importar CSV de candidatos
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Importar CSV de candidatos</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form method="POST" th:action="@{/candidatos/upload/csv/{idCurso}(idCurso=${idCurso})}" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <input class="form-control" type="file" name="file"/>
+                        </div><br/>
+                        <input type="submit" value="Enviar" class="btn btn-primary float-right"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão para acionar modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo1">
+        Importar CSV do cartão resposta
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalExemplo1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel1">Importar CSV do cartão resposta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form method="POST" th:action="@{/candidatos/upload/csv/cartao/{idCurso}(idCurso=${idCurso})}" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <input class="form-control" type="file" name="file"/>
+                        </div><br/>
+                        <input type="submit" value="Enviar" class="btn btn-primary float-right"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="card">
         <div class="card-header">
@@ -36,21 +92,21 @@
                         <div class="form-group">
                             <label>Código</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Cod" th:field="*{codigo}" required>
+                                <input type="text" class="form-control" placeholder="Cod" th:field="*{codigo}" disabled="">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-8">
                         <div class="form-group">
                             <label>Nome</label>
-                            <input type="text" class="form-control" placeholder="Informe o nome do curso" th:field="*{nome}" required >
+                            <input type="text" class="form-control" placeholder="Informe o nome do curso" th:field="*{nome}" disabled="">
                         </div>
                     </div>
                     <div class="col-12 col-md-3">
                         <div class="form-group">
                             <label>Locação</label>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Informe a cidade de locação" th:field="*{cidadeLocacao}" required>
+                                <input type="text" class="form-control"  th:field="*{cidadeLocacao}" disabled="">
                             </div>
                         </div>
                     </div>
@@ -112,11 +168,7 @@
                     <div class="col-12 col-md-4">
                         <div class="form-group">
                             <label>Escolaridade</label>
-                            <input th:field="*{nivel}" class="form-control" required>
-                                <option value="">Selecione</option>
-                                <option th:each="nivel : ${T(com.dominios.vestib.model.Escolaridade).values()}" th:value="${nivel}"
-                                        th:text="${nivel.valor}"></option>
-                            </input>
+                           <input th:field="*{nivel.valor}" class="form-control" disabled="">
                         </div>
                     </div>
                 </div>
@@ -124,42 +176,14 @@
         </div>
     </div>
 
-
-    <div class = "col-4">
-        <a href="#" th:href="@{/candidatos/get/upload/csv/{idCurso}(idCurso=${curso.id})}"><button type="button" class="btn btn-primary"> importar csv </button></a>
-    </div>
-    <div class = "col-4">
-        <a href="#" th:href="@{/candidatos/get/upload/csv/cartao/{idCurso}(idCurso=${curso.id})}"><button type="button" class="btn btn-primary"> importar csv do cartao resposta </button></a>
-    </div>
     <div class="container" th:unless="${#lists.isEmpty(disciplinas)}">
         <div th:replace="lista-disciplinas.html :: list(disciplinas=${disciplinas})">...</div>
     </div>
-    <!-- Botão para acionar modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalExemplo">
-        Abrir modal de demonstração
-    </button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalExemplo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Título do modal</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary">Salvar mudanças</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </html>
