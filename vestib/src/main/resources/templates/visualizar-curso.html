@@ -22,7 +22,11 @@
         </ol>
     </nav>
     <a th:href="@{/candidatos/list/{idCurso}(idCurso=${curso.id})}"><button class="btn btn-primary">candidatos</button> </a>
-
+    <div>
+        <form method="GET" th:action="@{/classificacao/generate/{idCurso}(idCurso=${curso.id})}">
+            <button type="submit" name="submit" value="value" class="dropdown-item">Gerar classificação</button>
+        </form>
+    </div>
     <div class="card">
         <div class="card-header">
             <h5 class="mb-0">
