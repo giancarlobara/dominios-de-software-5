@@ -10,16 +10,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.text.DecimalFormat;
 import java.util.*;
 
 @Service
 public class ServicoCandidato {
     private final RepositorioCandidato repositorioCandidato;
     private final ServicoPessoa servicoPessoa;
+    private final ServicoCurso servicoCurso;
 
-    public ServicoCandidato(RepositorioCandidato repositorioCandidato, ServicoPessoa servicoPessoa) {
+    public ServicoCandidato(RepositorioCandidato repositorioCandidato, ServicoPessoa servicoPessoa, ServicoCurso servicoCurso) {
         this.repositorioCandidato = repositorioCandidato;
         this.servicoPessoa = servicoPessoa;
+        this.servicoCurso = servicoCurso;
     }
     public Long save(Candidato candidato){
         Optional<Candidato> optionalCandidato = repositorioCandidato.findByCodigo(candidato.getCodigo());
@@ -92,6 +95,7 @@ public class ServicoCandidato {
                 candidato.setCartaoResposta(gabarito);
                 candidato.setSituacao((cr.getAusente() == 1)? 0 : 1);
                 candidato.setNomeImagem(cr.getNomeImagem());
+                save(candidato);
             }else{
                 log.add(new LogCartaoResposta(cr.getCodigoCandidato(),"Candidato não existe ou codigo incorreto"));
             }
@@ -100,6 +104,7 @@ public class ServicoCandidato {
     }
     public double calculateNota(String gabarito, String cr){
         int acertos = 0;
+        DecimalFormat df = new DecimalFormat("##0.00");
         if(!StringUtil.isNullOrEmpty(cr)) {
             for (int i = 0; i < gabarito.length() && i < cr.length() ; i++) {
                 if (gabarito.charAt(i) == cr.charAt(i)) {
@@ -107,13 +112,31 @@ public class ServicoCandidato {
                 }
             }
         }
-        return (acertos > 0)? ((double) gabarito.length() / acertos ): 0.0;
+        double nota;
+        if (acertos > 0){
+           String aux = df.format(((double) gabarito.length() / acertos )).replace(",",".");
+            nota = Double.parseDouble(aux);
+        }else{
+            nota = 0.00;
+        }
+        return nota;
     }
     public void calculate(Curso curso){
         List<Candidato> candidatos = repositorioCandidato.findByCursoId(curso.getId());
         for (Candidato candidato : candidatos){
             candidato.setNotaFinal(calculateNota(curso.getGabarito(),candidato.getCartaoResposta()));
             save(candidato);
+        }
+    }
+    public void calculate(long idCurso) {
+        Curso curso = servicoCurso.getById(idCurso);
+        if (curso != null) {
+            List<Candidato> candidatos = repositorioCandidato.findByCursoId(idCurso);
+            for (Candidato candidato : candidatos) {
+                    candidato.setNotaFinal(calculateNota(curso.getGabarito(), candidato.getCartaoResposta()));
+                    save(candidato);
+
+            }
         }
     }
 }

@@ -106,8 +106,7 @@ public class ControleCandidato {
         Files.deleteIfExists(Path.of("/opt/file.csv"));
         List<LogCartaoResposta> log;
         log = servicoCandidato.RegisterCandidatos(csvCRS,idCurso);
-
-
+        servicoCandidato.calculate(idCurso);
         List<Candidato> candidatos = servicoCandidato.getCandidatosSemImagem(idCurso);
         if(!candidatos.isEmpty()){
             candidatos.forEach(c -> {

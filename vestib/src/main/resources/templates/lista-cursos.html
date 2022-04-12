@@ -12,13 +12,13 @@
         <h1 class="display-4">Lista de Cursos</h1>
     </div>
     <nav class="mb-5">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                <a th:href="@{/home}">Home</a>
-            </li>
-            <li class="breadcrumb-item active">Lista de Cursos</li>
-        </ol>
-
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a th:href="@{/home}">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active">Lista de Cursos</li>
+                    <li class="d-flex w-100">teste</li>
+                </ol>
     </nav>
     <div class = "container-fluid">
     <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#lists.isEmpty(cursos)}">
