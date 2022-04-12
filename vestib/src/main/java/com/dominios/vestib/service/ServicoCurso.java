@@ -12,10 +12,12 @@ import java.util.Optional;
 public class ServicoCurso {
     private final RepositorioCurso repositorioCurso;
     private final ServicoDisciplina servicoDisciplina;
+    private final ServicoCandidato servicoCandidato;
 
-    public ServicoCurso(RepositorioCurso repositorioCurso, ServicoDisciplina servicoDisciplina) {
+    public ServicoCurso(RepositorioCurso repositorioCurso, ServicoDisciplina servicoDisciplina, ServicoCandidato servicoCandidato) {
         this.repositorioCurso = repositorioCurso;
         this.servicoDisciplina = servicoDisciplina;
+        this.servicoCandidato = servicoCandidato;
     }
     public Long save(Curso curso){
         repositorioCurso.save(curso);
@@ -29,6 +31,7 @@ public class ServicoCurso {
         return repositorioCurso.findAllOrderByCodigo();
     }
     public void delete(long id){
+        servicoCandidato.deleteAllByCurso(id);
         servicoDisciplina.deleteAllByCurso(id);
         repositorioCurso.deleteById(id);
     }

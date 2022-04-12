@@ -18,11 +18,13 @@ public class ServicoCandidato {
     private final RepositorioCandidato repositorioCandidato;
     private final ServicoPessoa servicoPessoa;
     private final ServicoCurso servicoCurso;
+    private final ServicoClassificacao servicoClassificacao;
 
-    public ServicoCandidato(RepositorioCandidato repositorioCandidato, ServicoPessoa servicoPessoa, ServicoCurso servicoCurso) {
+    public ServicoCandidato(RepositorioCandidato repositorioCandidato, ServicoPessoa servicoPessoa, ServicoCurso servicoCurso, ServicoClassificacao servicoClassificacao) {
         this.repositorioCandidato = repositorioCandidato;
         this.servicoPessoa = servicoPessoa;
         this.servicoCurso = servicoCurso;
+        this.servicoClassificacao = servicoClassificacao;
     }
     public Long save(Candidato candidato){
         Optional<Candidato> optionalCandidato = repositorioCandidato.findByCodigo(candidato.getCodigo());
@@ -139,4 +141,17 @@ public class ServicoCandidato {
             }
         }
     }
+//    public void deleteAllByCurso(long idCurso){
+//        List<Candidato> candidatos = repositorioCandidato.findByCursoId(idCurso);
+//        for (Candidato candidato : candidatos){
+//            candidato.setPessoa(null);
+//            repositorioCandidato.save(candidato);
+//            repositorioCandidato.deleteById(candidato.getId());
+//        }
+//    }
+    public void deleteAllByCurso(long idCurso){
+        servicoClassificacao.deleteByCurso(idCurso);
+        repositorioCandidato.deleteAllByCursoId(idCurso);
+    }
+
 }

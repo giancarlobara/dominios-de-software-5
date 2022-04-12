@@ -122,4 +122,10 @@ public class ControleCandidato {
 //        String url = "forward:/cursos/list/" + idCurso;
 //        return new RedirectView("forward:/cursos/list/"+idCurso);
     }
+    @PostMapping ("/removeAll/{idCurso}")
+    public String deleteAll(Model model, @PathVariable Long idCurso) {
+        servicoCandidato.deleteAllByCurso(idCurso)
+        ;
+        return "redirect:/candidatos/list/"+idCurso;
+    }
 }

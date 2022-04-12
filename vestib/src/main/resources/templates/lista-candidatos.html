@@ -47,12 +47,7 @@
         <li class="breadcrumb-item active">Lista de Candidatos</li>
     </ol>
 </nav>
-<div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#lists.isEmpty(candidatos)}">
-    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-    <div>
-         Não possui registros.
-    </div>
-</div>
+
 
 <div class="container">
     <div class="row">
@@ -87,7 +82,7 @@
         </div>
         <div class="col-md">
             <!-- Botão para acionar modal -->
-            <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#modalExemplo1">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalExemplo1">
                 Importar CSV do cartão resposta
             </button>
 
@@ -114,9 +109,19 @@
                 </div>
             </div>
         </div>
+        <div class="col-md">
+                <form method="POST" th:action="@{/candidatos/removeAll/{idCurso}(idCurso=${idCurso})}">
+                    <button type="submit" name="submit" class="btn btn-info float-right" >excluir candidatos</button>
+                </form>
+        </div>
     </div>
     <br/>
-
+    <div class="alert alert-warning d-flex align-items-center" role="alert" th:if="${#lists.isEmpty(candidatos)}">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+        <div>
+            Não possui registros.
+        </div>
+    </div>
     <table th:unless="${#lists.isEmpty(candidatos)}" class="table table-striped table-hover">
         <thead id="div3">
         <tr>

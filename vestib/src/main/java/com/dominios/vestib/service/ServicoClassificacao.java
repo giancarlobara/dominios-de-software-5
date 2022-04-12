@@ -26,4 +26,7 @@ public class ServicoClassificacao {
         Optional<Classificacao> classificacao = repositorioClassificacao.findByCandidatoId(idCandidato);
         return (classificacao.isPresent())? classificacao.get() : null;
     }
+    public void deleteByCurso(long idCurso){
+        repositorioClassificacao.deleteAllByCursoId(idCurso);
+    }
 }

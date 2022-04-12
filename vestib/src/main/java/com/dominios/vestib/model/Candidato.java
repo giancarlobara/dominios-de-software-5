@@ -22,7 +22,7 @@ public class Candidato {
     @ManyToOne
     private Curso curso;
 
-    @JoinColumn(nullable = false)
+    @JoinColumn(nullable = true)
     @ManyToOne
     private Pessoa pessoa;
 
