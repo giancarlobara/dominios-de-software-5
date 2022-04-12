@@ -49,7 +49,7 @@
                 <th scope="col">Código</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Nivel</th>
-                <th scope="col">Cidade locação</th>
+                <th scope="col">Locação</th>
                 <th scope="col">Função</th>
                 <th scope="col">Grupo</th>
                 <th scope="col">Ações</th>
@@ -75,12 +75,10 @@
                                 </form>
                             </div>
                             <div>
-                            <div>
                                 <form method="POST" th:action="@{/cursos/remove(id=${curso.id})}">
                                     <button type="submit" name="submit" value="value" class="dropdown-item">Apagar</button>
                                 </form>
                             </div>
-
                         </ul>
                     </div>
                 </td>
