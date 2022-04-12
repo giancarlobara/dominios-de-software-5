@@ -7,11 +7,11 @@
 </head>
 
 <body>
-    <div class="jumbotron p-4 my-1">
+    <div id="div1" class="jumbotron-fluid p-4 mb-0 text-white" >
         <h1 class="display-4">Dados do Curso</h1>
     </div>
     <nav class="mb-5">
-        <ol class="breadcrumb">
+        <ol id="div2" class="breadcrumb">
             <li class="breadcrumb-item">
                 <a th:href="@{/home}">Home</a>
             </li>
@@ -21,16 +21,24 @@
             <li class="breadcrumb-item active">Dados do Curso</li>
         </ol>
     </nav>
-    <a th:href="@{/candidatos/list/{idCurso}(idCurso=${curso.id})}"><button class="btn btn-primary">candidatos</button> </a>
-    <div>
-        <form method="GET" th:action="@{/classificacao/generate/{idCurso}(idCurso=${curso.id})}">
-            <button type="submit" name="submit" value="value" class="dropdown-item">Gerar classificação</button>
+    <div class="container">
+        <div class="row">
+             <div class="col-md">
+            <a th:href="@{/candidatos/list/{idCurso}(idCurso=${curso.id})}">
+                <button id="but1" class="btn  btn-info col-md-4">Candidatos</button>
+            </a>
+             </div>
+            <div class="col-md">
+        <form  method="GET" th:action="@{/classificacao/generate/{idCurso}(idCurso=${curso.id})}">
+            <button id="but2" class="btn btn-info col-md-4 float-right" >Classificação</button>
         </form>
+            </div>
     </div>
+        <br/>
     <div class="card">
-        <div class="card-header">
+        <div id="div3" class="card-header">
             <h5 class="mb-0">
-                Cadastro
+                Dados
             </h5>
         </div>
         <div class="card-body">
@@ -101,7 +109,7 @@
                 <div class="form-row">
                     <div class="col-12 col-md-2">
                         <div class="form-group">
-                            <label>Nota mínima requerida:</label>
+                            <label>Nota mínima:</label>
                             <div class="input-group">
                                 <input type="number" min="0" max="10" class="form-control" th:field="*{notaMinima}">
                             </div>
@@ -123,13 +131,23 @@
             </form>
         </div>
     </div>
+    </div>
     <div class="container" th:unless="${#lists.isEmpty(disciplinas)}">
-        <div th:replace="lista-disciplinas.html :: list(disciplinas=${disciplinas})">...</div>
+        <div th:replace="lista-disciplinas.html :: list(disciplinas=${disciplinas})"></div>
     </div>
 
 
 </body>
+<style>
+    #div1, #div3  {background-color: #301762}
+    #div1, #div3 {color: #ffffff}
+    #div2 {background-color: #E9F1F2}
+    body {background-color: #F2F2F2}
+    #div5 {color: #301762}
 
+
+
+</style>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>

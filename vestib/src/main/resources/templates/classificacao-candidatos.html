@@ -6,16 +6,33 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
 </head>
-<nav>
 
-</nav>
 <body>
-<div class="container-fluid">
-    <card>
-    </card>
-    </div>
+<div id="div1" class="jumbotron-fluid p-4 mb-0 text-white" >
+        <h1 class="display-4 ">Classificação</h1>
+</div>
+<nav class="mb-5">
+    <ol id="div2" class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a th:href="@{/home}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a th:href="@{/cursos/list}">Lista de Cursos</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a th:href="@{/cursos/list}">Dados do Curso</a>
+        </li>
+        <li class="breadcrumb-item active">Classificação</li>
+    </ol>
+</nav>
+<blockquote class="blockquote text-center">
+    <h2 id="div5" th:text="${curso.nome}" class="font-weight-bold">Matemática</h2>
+    <h6 th:text="${curso.locacao}">Universidade Federal de Goiás</h6>
+</blockquote>
+<br/>
+<div class="container">
     <table th:unless="${#lists.isEmpty(classificacao)}" class="table table-striped table-hover">
-        <thead>
+        <thead id="div3">
         <tr>
             <th scope="col">Posição</th>
             <th scope="col">Nome</th>
@@ -25,7 +42,7 @@
         </thead>
         <tbody>
         <th:block th:each="class : ${classificacao}">
-            <tr>
+            <tr >
                 <th scope="row" th:text="${class.posicao}">...</th>
                 <td th:text="${class.candidato.pessoa.nome}">...</td>
                 <td th:text="${class.candidato.pessoa.dataNasc}">...</td>
@@ -34,14 +51,17 @@
         </th:block>
         </tbody>
     </table>
-    </div>
 </div>
-
-
-
-
-
 </body>
+<style>
+    #div1, #div3  {background-color: #301762}
+    #div1, #div3 {color: #ffffff}
+    #div2 {background-color: #E9F1F2}
+    body {background-color: #F2F2F2}
+    #div5 {color: #301762}
+
+
+</style>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
