@@ -5,43 +5,45 @@
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-          crossorigin="anonymous" />
+          crossorigin="anonymous"/>
 </head>
-<body>
-<div class="jumbotron p-4 my-1">
-    <h1 class="display-4">Página home</h1>
+<div id="div1" class="jumbotron-fluid p-4 mb-0 text-white" >
+<div class="row">
+    <div class="col-md">
+        <h1 class="display-4">Vestib</h1>
+    </div>
+    <div class="col-md">
+        <form th:action="@{/logout}" method="post" class="float-right ">
+            <input type="submit" value="Logout" class="btn btn-light"/>
+        </form>
+    </div>
 </div>
-<nav class="mb-5">
+</div>
+<nav id="div2" class="mb-5">
     <ol class="breadcrumb">
         <li class="breadcrumb-item active">Home</li>
     </ol>
 </nav>
-<div class = "row">
-    <div class="col-6">
-        <a href="#" th:href="@{/cursos/add}"><button type="button" class="btn btn-primary">cadastrar Curso </button></a>
+<body>
+<div class="container">
+<div class="row">
+    <div class="col-md">
+        <a href="#" th:href="@{/cursos/add}"><button type="button" class="btn btn-info">cadastrar Curso </button></a>
     </div>
-    <div class="col-6">
-        <a href="#" th:href="@{/cursos/list}"><button type="button" class="btn btn-primary"> Listar Cursos </button></a>
+    <div class="col-md">
+        <a href="#" th:href="@{/cursos/list}"><button type="button" class="btn btn-info float-right"> Listar Cursos </button></a>
     </div>
-
-</div>
-<div class = "row">
-    <div class = "col-4"></div>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Logout"/>
-    </form>
-<!--    <div class = "col-4">-->
-<!--        <h4>Gera um csv no caminho opt/pessoas.csv</h4>-->
-<!--        <a href="#" th:href="@{/candidatos/upload/csv}"><button type="button" class="btn btn-primary"> Gerar csv </button></a>-->
-<!--    </div>-->
-<!--    <div class = "col-4">-->
-<!--        <h4>add disciplina</h4>-->
-<!--        <a href="#" th:href="@{/disciplinas/add}"><button type="button" class="btn btn-primary"> Gerar csv </button></a>-->
-<!--    </div>-->
-
 
 </div>
 
 
+</div>
 </body>
+<style>
+    #div1, #div3  {background-color: #301762}
+    #div1, #div3 {color: #ffffff}
+    #div2 {background-color: #E9F1F2}
+    body {background-color: #F2F2F2}
+    #div5 {color: #301762}
+</style>
 </html>
