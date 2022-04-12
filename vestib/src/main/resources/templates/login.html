@@ -17,7 +17,7 @@
 
                     <form id="login-form" class="form" th:action="@{/login}" method="post">
 
-                        <h3 class="text-center text-info">Login</h3><br/>
+                        <h3  id="div3" class="text-center">Login</h3><br/>
                         <div th:if="${param.error}">
                             <p class="text-danger">Os dados de acesso estão incorretos, por favor tente novamente!</p>
                         </div>
@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label for="remember-me" class="text-info"><span>Lembre-se de mim</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
-                            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Entrar</button>
+                            <button id="div1" class="btn btn-lg  btn-block btn-signin" type="submit">Entrar</button>
                         </div>
                         <br/>
                         <br/><br/>
@@ -47,7 +47,7 @@
     body {
     margin: 0;
     padding: 0;
-    background-color: #bcdfe0;
+    background-color: #E9F1F2;
     height: 100vh;
   }
   #login .container #login-row #login-column #login-box {
@@ -55,8 +55,8 @@
     margin-bottom: 120px;
     max-width: 800px;
     height: 340px;
-    border: 1px solid #9C9C9C;
-    background-color: #EAEAEA;
+    border: 1px solid #301762;
+    background-color: #F2F2F2;
   }
   #login .container #login-row #login-column #login-box #login-form {
     padding: 20px;
@@ -64,4 +64,7 @@
   #login .container #login-row #login-column #login-box #login-form #register-link {
     margin-top: -85px;
   }
+   #div1  {background-color: #301762}
+   #div1   {color: #ffffff}
+   #div3   {color: #301762}
 </style>
