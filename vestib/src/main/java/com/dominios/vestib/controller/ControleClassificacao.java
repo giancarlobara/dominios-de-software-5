@@ -39,7 +39,7 @@ public class ControleClassificacao {
             int cont = 1;
             if (candidatos != null) {
                 for(int i = candidatos.size()-1; i>=0;i--){
-                    if (!StringUtil.isNullOrEmpty(candidatos.get(i).getNomeImagem()) || candidatos.get(i).getSituacao() != 0) {
+                    if (!StringUtil.isNullOrEmpty(candidatos.get(i).getNomeImagem()) && candidatos.get(i).getSituacao() != 0) {
                         Classificacao classificacao = new Classificacao();
                         Classificacao optionalClass = servicoClassificacao.getClassificacaoByCandidato(candidatos.get(i).getId());
                         if(optionalClass != null) {

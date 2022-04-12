@@ -29,17 +29,19 @@
             <a th:href="@{/cursos/list}">Lista de Cursos</a>
         </li>
         <li class="breadcrumb-item">
-            <a th:href="@{/cursos/list}">Dados do Curso</a>
+            <a th:href="@{/cursos/list/{idCurso}(idCurso=${curso.id})}">Dados do Curso</a>
         </li>
         <li class="breadcrumb-item active">Classificação</li>
     </ol>
 </nav>
-<blockquote class="blockquote text-center">
-    <h2 id="div5" th:text="${curso.nome}" class="font-weight-bold">Matemática</h2>
-    <h6 th:text="${curso.locacao}">Universidade Federal de Goiás</h6>
-</blockquote>
-<br/>
-<div class="container">
+
+
+<div class="container mb-5">
+    <blockquote class="blockquote text-center">
+        <h2 id="div5" th:text="${curso.nome}" class="font-weight-bold">...</h2>
+        <h6 th:text="${curso.cidadeLocacao}">...</h6>
+    </blockquote>
+    <br/>
     <table th:unless="${#lists.isEmpty(classificacao)}" class="table table-striped table-hover">
         <thead id="div3">
         <tr>
@@ -54,7 +56,7 @@
             <tr >
                 <th scope="row" th:text="${class.posicao}">...</th>
                 <td th:text="${class.candidato.pessoa.nome}">...</td>
-                <td th:text="${class.candidato.pessoa.dataNasc}">...</td>
+                <td th:text="${#temporals.format(class.candidato.pessoa.dataNasc, 'dd/MM/yyyy')}">...</td>
                 <td th:text="${class.candidato.notaFinal}">...</td>
             </tr>
         </th:block>

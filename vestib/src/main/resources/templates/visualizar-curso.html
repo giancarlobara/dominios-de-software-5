@@ -30,7 +30,7 @@
             <li class="breadcrumb-item active">Dados do Curso</li>
         </ol>
     </nav>
-    <div class="container">
+    <div class="container mb-5">
         <div class="row">
              <div class="col-md">
             <a th:href="@{/candidatos/list/{idCurso}(idCurso=${curso.id})}">
@@ -141,7 +141,7 @@
         </div>
     </div>
     </div>
-    <div class="container" th:unless="${#lists.isEmpty(disciplinas)}">
+    <div class="container mb-5" th:unless="${#lists.isEmpty(disciplinas)}">
         <div th:replace="lista-disciplinas.html :: list(disciplinas=${disciplinas})"></div>
     </div>
 
