@@ -139,7 +139,7 @@
             <th scope="row" th:text="${cand.codigo}">...</th>
             <td th:text="${cand.pessoa.nome}">...</td>
             <td th:text="${cand.pessoa.cpf}">...</td>
-            <td th:text="${cand.pessoa.dataNasc}">...</td>
+            <td th:text="${#temporals.format(cand.pessoa.dataNasc, 'dd/MM/yyyy')}">...</td>
             <td th:text="${cand.situacao}">...</td>
             <td th:text="${cand.notaFinal}">...</td>
         </tr>

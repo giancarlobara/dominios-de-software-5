@@ -113,7 +113,7 @@ public class ControleCandidato {
                 log.add(new LogCartaoResposta(c.getCodigo(),"Candidato sem imagem do cartão resposta"));
             });
         }
-        redirectAttributes.addFlashAttribute(log);
+        servicoCsvCandidato.writeCsvLog(log);
         return new ModelAndView("redirect:/candidatos/list/"+idCurso);
 
 

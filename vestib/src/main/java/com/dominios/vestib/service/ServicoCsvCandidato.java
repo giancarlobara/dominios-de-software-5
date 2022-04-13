@@ -58,8 +58,8 @@ public class ServicoCsvCandidato {
 
         return csvCartaoRespostas;
     }
-    public void writeCsvFromBean(List<LogCartaoResposta> log) throws Exception {
-        Writer writer = Files.newBufferedWriter(Paths.get("/opt/pessoas.csv"));
+    public void writeCsvLog(List<LogCartaoResposta> log) throws Exception {
+        Writer writer = Files.newBufferedWriter(Paths.get("/opt/logger.csv"));
          StatefulBeanToCsv sbc = new StatefulBeanToCsvBuilder(writer)
                 .withSeparator(CSVWriter.DEFAULT_SEPARATOR)
                 .build();

@@ -6,6 +6,7 @@ import com.dominios.vestib.model.Csv.LogCartaoResposta;
 import com.dominios.vestib.model.Curso;
 import com.dominios.vestib.repository.RepositorioCandidato;
 import com.dominios.vestib.utils.StringUtil;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -20,7 +21,7 @@ public class ServicoCandidato {
     private final ServicoCurso servicoCurso;
     private final ServicoClassificacao servicoClassificacao;
 
-    public ServicoCandidato(RepositorioCandidato repositorioCandidato, ServicoPessoa servicoPessoa, ServicoCurso servicoCurso, ServicoClassificacao servicoClassificacao) {
+    public ServicoCandidato(RepositorioCandidato repositorioCandidato, ServicoPessoa servicoPessoa, @Lazy ServicoCurso servicoCurso, ServicoClassificacao servicoClassificacao) {
         this.repositorioCandidato = repositorioCandidato;
         this.servicoPessoa = servicoPessoa;
         this.servicoCurso = servicoCurso;
@@ -98,6 +99,9 @@ public class ServicoCandidato {
                 candidato.setSituacao((cr.getAusente() == 1)? 0 : 1);
                 candidato.setNomeImagem(cr.getNomeImagem());
                 save(candidato);
+                if(candidato.getSituacao() == 0){
+                    log.add(new LogCartaoResposta(candidato.getCodigo(),"Candidato Ausente"));
+                }
             }else{
                 log.add(new LogCartaoResposta(cr.getCodigoCandidato(),"Candidato não existe ou codigo incorreto"));
             }
@@ -116,7 +120,7 @@ public class ServicoCandidato {
         }
         double nota;
         if (acertos > 0){
-           String aux = df.format(((double) gabarito.length() / acertos )).replace(",",".");
+           String aux = df.format(((double) acertos )).replace(",",".");
             nota = Double.parseDouble(aux);
         }else{
             nota = 0.00;
